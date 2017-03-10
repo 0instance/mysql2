@@ -23,6 +23,14 @@
 </style>
 </head>
 <body>
+<?php
+require_once 'db.php';
+$sql = "SELECT * from Darbuotojai where id = {$_GET['id']}";
+$query = mysqli_query($db, $sql);
+$count = 0;
+$row = mysqli_fetch_assoc($query);
+
+?>
 
 
 
@@ -44,9 +52,9 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					
+
 					<li><a href="statistika.php">Įmonės statistika</a></li>
-				
+
 				</ul>
 			</div>
 		</div>
@@ -59,7 +67,7 @@
 
 			<div class="col-md-12">
 				<div class="page-header">
-					<h1>Vardas Pavardauskas</h1>
+					<h1><?=$row['name'] . " " . $row['surname']?> </h1>
 				</div>
 
 
@@ -70,19 +78,19 @@
 			<div class="col-md-6">
 
 				<p>
-					<b>Pareigos: </b> <br /> Direktorius
+					<b>Pareigos: </b> <br /> <?=ucfirst($row['education'])?>
 				</p>
 				<p>
-					<b>Mėnesinė alga: </b> <br />500 EUR
+					<b>Mėnesinė alga: </b> <br /><?=$row['salary']?> EUR
 				</p>
 
 			</div>
 			<div class="col-md-6">
 
 				<p>
-					<b>Telefonas: </b> <br /> +370 670 21276
+					<b>Telefonas: </b> <br /> <?='+370 6' . substr($row['phone'], 2)?>
 				</p>
-				
+
 
 
 			</div>
@@ -98,7 +106,7 @@
 
 						<tr>
 							<td>Priskaičiuotas atlyginimas „ant popieriaus“:</td>
-							<td class="curr">500.00 EUR</td>
+							<td class="curr"><?=$row['salary']?> EUR</td>
 
 
 						</tr>
@@ -156,9 +164,9 @@
 			</div>
 
 
-			
+
 		</div>
-		
+
 	</div>
 
 

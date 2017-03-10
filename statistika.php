@@ -68,16 +68,30 @@ td {
 							<th>Alga</th>
 							<th></th>
 						</tr>
+						<?php
+
+require_once 'db.php';
+$sql = "SELECT * from Darbuotojai";
+$query = mysqli_query($db, $sql);
+$count = 0;
+while ($row = mysqli_fetch_assoc($query)) {
+	$count++;
+	?>
+
 						<tr>
-							<td><strong>1.</strong></td>
-							<td>Vardas</td>
-							<td>Pavardauskas</td>
-							<td>+370000000</td>
-							<td>Aukštasis</td>
-							<td>00000</td>
-							<td><a href="darbuotojas.php" class="btn btn-primary">Plačiau</a></td>
+							<td><strong><?=$count?></strong></td>
+							<td><?=$row['name']?></td>
+							<td><?=$row['surname']?></td>
+							<td><?=$row['phone']?></td>
+							<td><?=$row['education']?></td>
+							<td><?=$row['salary']?></td>
+							<td><a href="darbuotojas.php?id=<?=$row['id']?>" class="btn btn-primary">Plačiau</a></td>
 						</tr>
-					</table>
+	<?php
+}
+
+?>
+				</table>
 				</div>
 			</div>
 		</div>
@@ -96,25 +110,28 @@ td {
 							<th></th>
 						</tr>
 
-						<tr>
-							<td>Direktorius</td>
-							<td>1500 EUR</td>
-							<td><a href="darbuotojai_pareigos.php" class="btn btn-primary">Rodyti darbuotojus</a></td>
+<?php
+
+$sql = "SELECT * from Pareigos";
+$query = mysqli_query($db, $sql);
+$count = 0;
+while ($row = mysqli_fetch_assoc($query)) {
+	?>
+<tr>
+							<td><?=$row['name']?></td>
+							<td><?=$row['base_salary']?> EUR</td>
+							<td><a href="darbuotojai_pareigos.php?id=<?=$row['id']?>" class="btn btn-primary">Rodyti darbuotojus</a></td>
 						</tr>
-						<tr>
-							<td>Programotojas</td>
-							<td>1500 EUR</td>
-							<td><a href="#" class="btn btn-primary">Rodyti darbuotojus</a></td>
-						</tr>
-						<tr>
-							<td>Valytojas</td>
-							<td>1000 EUR</td>
-							<td><a href="#" class="btn btn-primary">Rodyti darbuotojus</a></td>
-						</tr>
+
+
+<?php
+
+}
+?>
 					</table>
 				</div>
 			</div>
-			
+
 		</div>
 
 
